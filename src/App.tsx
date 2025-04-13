@@ -17,9 +17,20 @@ import ProductsPage from "./pages/admin/ProductsPage";
 import OrdersPage from "./pages/admin/OrdersPage";
 import NotFound from "./pages/NotFound";
 
+// New imports
+import ProfilePage from "./pages/account/ProfilePage";
+import UserOrdersPage from "./pages/account/OrdersPage";
+import AddressesPage from "./pages/account/AddressesPage";
+import WishlistPage from "./pages/account/WishlistPage";
+import CustomersPage from "./pages/admin/CustomersPage";
+import ReviewsPage from "./pages/admin/ReviewsPage";
+import SettingsPage from "./pages/admin/SettingsPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import FAQPage from "./pages/FAQPage";
+
 const queryClient = new QueryClient();
 
-// Changed from arrow function with parentheses to a proper React function component
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
@@ -39,10 +50,24 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             
+            {/* User Account Routes */}
+            <Route path="/account/profile" element={<ProfilePage />} />
+            <Route path="/account/orders" element={<UserOrdersPage />} />
+            <Route path="/account/addresses" element={<AddressesPage />} />
+            <Route path="/account/wishlist" element={<WishlistPage />} />
+            
             {/* Admin Routes */}
             <Route path="/admin" element={<AdminDashboardPage />} />
             <Route path="/admin/products" element={<ProductsPage />} />
             <Route path="/admin/orders" element={<OrdersPage />} />
+            <Route path="/admin/customers" element={<CustomersPage />} />
+            <Route path="/admin/reviews" element={<ReviewsPage />} />
+            <Route path="/admin/settings" element={<SettingsPage />} />
+            
+            {/* Static Content Pages */}
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/faq" element={<FAQPage />} />
             
             {/* Catch-all Route */}
             <Route path="*" element={<NotFound />} />

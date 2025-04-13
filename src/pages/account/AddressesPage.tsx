@@ -169,9 +169,17 @@ const AddressesPage = () => {
               </DialogHeader>
               <AddressForm 
                 onSubmit={(data) => {
+                  // Fix: Add type assertion and ensure all required properties are provided
                   const newAddress: AddressType = {
-                    ...data,
                     id: Date.now(),
+                    type: data.type,
+                    name: data.name,
+                    address: data.address,
+                    city: data.city,
+                    state: data.state,
+                    zipCode: data.zipCode,
+                    country: data.country,
+                    phone: data.phone,
                     isDefault: addresses.length === 0
                   };
                   setAddresses([...addresses, newAddress]);

@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,6 +15,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import OtpVerification from './OtpVerification';
 
 const registerSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -31,6 +32,9 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 
 const Register: React.FC = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const [showOtpVerification, setShowOtpVerification] = useState(false);
+  const [registrationData, setRegistrationData] = useState<RegisterFormValues | null>(null);
   
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -44,16 +48,61 @@ const Register: React.FC = () => {
   });
   
   function onSubmit(data: RegisterFormValues) {
-    // Simulate registration functionality
-    console.log('Register form submitted:', data);
+    // Store registration data for after OTP verification
+    setRegistrationData(data);
     
-    // Mock successful registration
+    // Show OTP verification
+    toast({
+      title: "OTP Sent",
+      description: `A verification code has been sent to ${data.phone}`,
+    });
+    
+    setShowOtpVerification(true);
+  }
+  
+  const handleOtpVerificationSuccess = () => {
+    // Here you would complete the registration process
+    // using the stored registration data
+    if (!registrationData) return;
+    
+    // Simulate successful registration after OTP verification
+    console.log('Registration successful with OTP verification:', registrationData);
+    
     toast({
       title: 'Registration Successful',
       description: 'Your account has been created!',
     });
     
-    // Redirect to login page would happen here in real implementation
+    // Redirect to login page
+    setTimeout(() => {
+      navigate('/login');
+    }, 1500);
+  };
+  
+  const handleResendOtp = () => {
+    if (!registrationData?.phone) return;
+    
+    toast({
+      title: "OTP Resent",
+      description: `A new verification code has been sent to ${registrationData.phone}`,
+    });
+  };
+  
+  const handleCancelOtp = () => {
+    setShowOtpVerification(false);
+  };
+  
+  if (showOtpVerification && registrationData) {
+    return (
+      <div className="container max-w-md mx-auto py-12">
+        <OtpVerification
+          phoneNumber={registrationData.phone}
+          onVerifySuccess={handleOtpVerificationSuccess}
+          onResendOtp={handleResendOtp}
+          onCancel={handleCancelOtp}
+        />
+      </div>
+    );
   }
   
   return (

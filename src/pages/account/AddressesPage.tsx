@@ -2,14 +2,29 @@
 import React, { useState } from 'react';
 import { PlusCircle, Edit, Trash2, Home, Building } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import AccountLayout from '@/components/account/AccountLayout';
 import AddressForm from '@/components/account/AddressForm';
 
+// Define the address type for proper TypeScript typing
+interface AddressType {
+  id: number;
+  type: "home" | "office";
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
+  phone: string;
+  isDefault: boolean;
+}
+
 // Sample address data (would come from API in real app)
-const initialAddresses = [
+const initialAddresses: AddressType[] = [
   {
     id: 1,
     type: "home",
@@ -37,8 +52,8 @@ const initialAddresses = [
 ];
 
 const AddressesPage = () => {
-  const [addresses, setAddresses] = useState(initialAddresses);
-  const [editingAddress, setEditingAddress] = useState<any>(null);
+  const [addresses, setAddresses] = useState<AddressType[]>(initialAddresses);
+  const [editingAddress, setEditingAddress] = useState<AddressType | null>(null);
   const { toast } = useToast();
 
   const handleDelete = (id: number) => {
@@ -103,18 +118,20 @@ const AddressesPage = () => {
                       <DialogHeader>
                         <DialogTitle>Edit Address</DialogTitle>
                       </DialogHeader>
-                      <AddressForm 
-                        initialData={editingAddress} 
-                        onSubmit={(data) => {
-                          setAddresses(addresses.map(a => 
-                            a.id === editingAddress.id ? {...data, id: a.id} : a
-                          ));
-                          toast({
-                            title: "Address updated",
-                            description: "Your address has been updated successfully."
-                          });
-                        }} 
-                      />
+                      {editingAddress && (
+                        <AddressForm 
+                          initialData={editingAddress} 
+                          onSubmit={(data) => {
+                            setAddresses(addresses.map(a => 
+                              a.id === editingAddress.id ? {...data, id: a.id} as AddressType : a
+                            ));
+                            toast({
+                              title: "Address updated",
+                              description: "Your address has been updated successfully."
+                            });
+                          }} 
+                        />
+                      )}
                     </DialogContent>
                   </Dialog>
                   <Button 
@@ -152,7 +169,7 @@ const AddressesPage = () => {
               </DialogHeader>
               <AddressForm 
                 onSubmit={(data) => {
-                  const newAddress = {
+                  const newAddress: AddressType = {
                     ...data,
                     id: Date.now(),
                     isDefault: addresses.length === 0

@@ -1,13 +1,14 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   Search, 
   ShoppingCart, 
   User, 
   Heart, 
   Menu, 
-  X 
+  X,
+  LogIn
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,10 +19,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
+import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/clerk-react';
 
 const Navbar: React.FC = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user } = useUser();
+  const navigate = useNavigate();
   
   return (
     <header className="sticky top-0 z-50 bg-background border-b">
@@ -67,27 +71,37 @@ const Navbar: React.FC = () => {
               <Heart size={20} />
             </Link>
             
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button className="hover:text-primary/70 transition-colors">
-                  <User size={20} />
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem asChild>
-                  <Link to="/login">Login</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/register">Register</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/account">My Account</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/orders">Orders</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {/* User Authentication */}
+            <SignedIn>
+              <UserButton 
+                appearance={{
+                  elements: {
+                    userButtonAvatarBox: "w-8 h-8"
+                  }
+                }}
+                afterSignOutUrl="/"
+              />
+            </SignedIn>
+            
+            <SignedOut>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="hover:text-primary/70 transition-colors">
+                    <User size={20} />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => navigate("/login")}>
+                    <LogIn className="mr-2 h-4 w-4" />
+                    Login
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("/register")}>
+                    <User className="mr-2 h-4 w-4" />
+                    Register
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </SignedOut>
             
             <Link to="/cart" className="hover:text-primary/70 transition-colors">
               <ShoppingCart size={20} />
@@ -169,6 +183,24 @@ const Navbar: React.FC = () => {
             >
               Layering
             </Link>
+
+            {/* Mobile Auth Links */}
+            <SignedOut>
+              <Link 
+                to="/login" 
+                className="text-lg font-medium py-2 border-b flex items-center"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <LogIn className="mr-2 h-5 w-5" /> Login
+              </Link>
+              <Link 
+                to="/register" 
+                className="text-lg font-medium py-2 border-b flex items-center"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <User className="mr-2 h-5 w-5" /> Register
+              </Link>
+            </SignedOut>
           </div>
         </div>
       </div>

@@ -17,17 +17,26 @@ import ProductsPage from "./pages/admin/ProductsPage";
 import OrdersPage from "./pages/admin/OrdersPage";
 import NotFound from "./pages/NotFound";
 
-// New imports
+// Account pages
 import ProfilePage from "./pages/account/ProfilePage";
 import UserOrdersPage from "./pages/account/OrdersPage";
 import AddressesPage from "./pages/account/AddressesPage";
 import WishlistPage from "./pages/account/WishlistPage";
+
+// Admin pages
 import CustomersPage from "./pages/admin/CustomersPage";
 import ReviewsPage from "./pages/admin/ReviewsPage";
 import SettingsPage from "./pages/admin/SettingsPage";
+
+// Static content pages
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import FAQPage from "./pages/FAQPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import TermsPage from "./pages/TermsPage";
+import ShippingPage from "./pages/ShippingPage";
+import SizingGuidePage from "./pages/SizingGuidePage";
+import CareersPage from "./pages/CareersPage";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +77,11 @@ const App = () => {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/privacy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/shipping" element={<ShippingPage />} />
+            <Route path="/size-guide" element={<SizingGuidePage />} />
+            <Route path="/careers" element={<CareersPage />} />
             
             {/* Catch-all Route */}
             <Route path="*" element={<NotFound />} />

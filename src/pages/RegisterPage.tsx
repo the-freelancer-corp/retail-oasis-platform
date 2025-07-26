@@ -9,7 +9,7 @@ const RegisterPage: React.FC = () => {
       <div className="container max-w-md mx-auto py-12">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-2">Create Account</h1>
-          <p className="text-muted-foreground">Sign up to get started with StyleHub</p>
+          <p className="text-muted-foreground">Sign up to get started with elocin</p>
         </div>
         <SignUp 
           routing="path"

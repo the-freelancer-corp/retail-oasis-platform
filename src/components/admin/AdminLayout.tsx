@@ -79,7 +79,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             "font-bold text-lg transition-all",
             collapsed ? "opacity-0 w-0" : "opacity-100 w-auto"
           )}>
-            StyleHub Admin
+            elocin Admin
           </span>
         </div>
         
@@ -135,7 +135,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
           {!collapsed && (
             <div className="overflow-hidden">
               <p className="text-sm font-medium">Admin User</p>
-              <p className="text-xs text-muted-foreground truncate">admin@stylehub.com</p>
+              <p className="text-xs text-muted-foreground truncate">admin@elocin.com</p>
             </div>
           )}
           

@@ -11,7 +11,7 @@ const AboutPage = () => {
       <div className="container py-12">
         <div className="max-w-3xl mx-auto space-y-8">
           <div className="text-center">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">About StyleHub</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">About elocin</h1>
             <p className="text-lg text-muted-foreground">
               Your premier destination for fashionable clothing and accessories.
             </p>
@@ -20,7 +20,7 @@ const AboutPage = () => {
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">Our Story</h2>
             <p>
-              Founded in 2020, StyleHub started with a simple mission: to provide fashion-forward individuals with high-quality, 
+              Founded in 2020, elocin started with a simple mission: to provide fashion-forward individuals with high-quality, 
               trendy clothing at accessible prices. What began as a small online boutique has grown into a thriving e-commerce 
               platform serving customers worldwide.
             </p>
@@ -28,7 +28,7 @@ const AboutPage = () => {
             <div className="grid md:grid-cols-2 gap-6 my-8">
               <img 
                 src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                alt="StyleHub team" 
+                alt="elocin team" 
                 className="rounded-lg shadow-md w-full h-auto"
               />
               <div className="flex flex-col justify-center space-y-4">

@@ -21,7 +21,7 @@ const PrivacyPolicyPage = () => {
             <section>
               <h2 className="text-2xl font-semibold">Introduction</h2>
               <p>
-                Welcome to StyleHub ("we," "our," or "us"). We are committed to protecting your privacy and personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website at www.stylehub.com, including any other media form, media channel, mobile website, or mobile application related or connected to StyleHub (collectively, the "Site").
+                Welcome to elocin ("we," "our," or "us"). We are committed to protecting your privacy and personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website at www.elocin.com, including any other media form, media channel, mobile website, or mobile application related or connected to elocin (collectively, the "Site").
               </p>
               <p>
                 Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
@@ -78,7 +78,7 @@ const PrivacyPolicyPage = () => {
                 <li>With vendors, consultants, and other service providers who need access to such information to carry out work on our behalf</li>
                 <li>With third parties with whom you choose to let us share information, such as social media sites</li>
                 <li>In response to a request for information if we believe disclosure is in accordance with, or required by, any applicable law, regulation, or legal process</li>
-                <li>If we believe your actions are inconsistent with our user agreements or policies, or to protect the rights, property, and safety of StyleHub or others</li>
+                <li>If we believe your actions are inconsistent with our user agreements or policies, or to protect the rights, property, and safety of elocin or others</li>
                 <li>In connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business by another company</li>
               </ul>
               <p>
@@ -92,9 +92,9 @@ const PrivacyPolicyPage = () => {
                 You have several choices regarding the information we collect and how it is used:
               </p>
               <ul className="list-disc list-inside pl-4 space-y-2">
-                <li><strong>Account Information</strong>: You may update, correct, or delete your account information at any time by logging into your account or emailing us at privacy@stylehub.com.</li>
+                <li><strong>Account Information</strong>: You may update, correct, or delete your account information at any time by logging into your account or emailing us at privacy@elocin.com.</li>
                 <li><strong>Cookies</strong>: Most web browsers are set to accept cookies by default. If you prefer, you can usually choose to set your browser to remove or reject browser cookies.</li>
-                <li><strong>Promotional Communications</strong>: You may opt out of receiving promotional emails from StyleHub by following the instructions in those emails. If you opt out, we may still send you non-promotional emails, such as those about your account or our ongoing business relations.</li>
+                <li><strong>Promotional Communications</strong>: You may opt out of receiving promotional emails from elocin by following the instructions in those emails. If you opt out, we may still send you non-promotional emails, such as those about your account or our ongoing business relations.</li>
                 <li><strong>Mobile Push Notifications</strong>: With your consent, we may send promotional and non-promotional push notifications to your mobile device. You can deactivate these messages at any time by changing the notification settings on your mobile device.</li>
               </ul>
             </section>
@@ -109,7 +109,7 @@ const PrivacyPolicyPage = () => {
             <section>
               <h2 className="text-2xl font-semibold">Children's Privacy</h2>
               <p>
-                Our Site is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are under 13, do not use or provide any information on this Site. If we learn we have collected or received personal information from a child under 13 without verification of parental consent, we will delete that information. If you believe we might have any information from or about a child under 13, please contact us at privacy@stylehub.com.
+                Our Site is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are under 13, do not use or provide any information on this Site. If we learn we have collected or received personal information from a child under 13 without verification of parental consent, we will delete that information. If you believe we might have any information from or about a child under 13, please contact us at privacy@elocin.com.
               </p>
             </section>
 
@@ -126,11 +126,11 @@ const PrivacyPolicyPage = () => {
                 If you have any questions about this Privacy Policy, please contact us at:
               </p>
               <div className="mt-4">
-                <p className="font-medium">StyleHub</p>
+                <p className="font-medium">elocin</p>
                 <p>123 Fashion Street</p>
                 <p>New York, NY 10001</p>
                 <p>United States</p>
-                <p className="mt-2">Email: privacy@stylehub.com</p>
+                <p className="mt-2">Email: privacy@elocin.com</p>
                 <p>Phone: +1 (555) 123-4567</p>
               </div>
             </section>

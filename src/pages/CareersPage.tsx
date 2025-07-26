@@ -94,7 +94,7 @@ const CareersPage = () => {
           <div className="text-center">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">Join Our Team</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Build your career at StyleHub, where fashion meets innovation. We're always looking for passionate individuals to help us redefine the future of retail.
+              Build your career at elocin, where fashion meets innovation. We're always looking for passionate individuals to help us redefine the future of retail.
             </p>
           </div>
 
@@ -102,14 +102,14 @@ const CareersPage = () => {
             <div>
               <img
                 src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                alt="StyleHub team meeting"
+                alt="elocin team meeting"
                 className="rounded-lg shadow-md w-full h-auto aspect-video object-cover"
               />
             </div>
             <div className="flex flex-col justify-center space-y-4">
               <h2 className="text-2xl font-semibold">Our Culture</h2>
               <p>
-                At StyleHub, we believe that fashion is more than just clothing—it's a form of self-expression that empowers individuals to be their authentic selves. Our team is united by a shared passion for creativity, innovation, and excellence.
+                At elocin, we believe that fashion is more than just clothing—it's a form of self-expression that empowers individuals to be their authentic selves. Our team is united by a shared passion for creativity, innovation, and excellence.
               </p>
               <p>
                 We foster an inclusive environment where diverse perspectives are valued and everyone has the opportunity to make an impact. From our designers to our developers, each team member plays a crucial role in our mission to provide exceptional fashion experiences.

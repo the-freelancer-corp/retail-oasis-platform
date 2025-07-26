@@ -21,8 +21,8 @@ const FAQPage = () => {
   const faqs = {
     general: [
       {
-        question: "What is StyleHub?",
-        answer: "StyleHub is an online fashion retailer offering a wide range of clothing, accessories, and footwear for men and women. We focus on providing high-quality, trendy items at accessible prices."
+        question: "What is elocin?",
+        answer: "elocin is an online fashion retailer offering a wide range of clothing, accessories, and footwear for men and women. We focus on providing high-quality, trendy items at accessible prices."
       },
       {
         question: "How do I create an account?",
@@ -30,11 +30,11 @@ const FAQPage = () => {
       },
       {
         question: "Do you have physical stores?",
-        answer: "Currently, StyleHub is an online-only retailer, but we're planning to open physical locations in major cities in the near future. Follow our social media for announcements!"
+        answer: "Currently, elocin is an online-only retailer, but we're planning to open physical locations in major cities in the near future. Follow our social media for announcements!"
       },
       {
         question: "How can I contact customer service?",
-        answer: "You can reach our customer service team through our Contact page, by email at support@stylehub.com, or by phone at +1 (555) 123-4567 during business hours (Monday-Friday, 9AM-6PM EST)."
+        answer: "You can reach our customer service team through our Contact page, by email at support@elocin.com, or by phone at +1 (555) 123-4567 during business hours (Monday-Friday, 9AM-6PM EST)."
       }
     ],
     orders: [
@@ -118,7 +118,7 @@ const FAQPage = () => {
           <div className="text-center">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h1>
             <p className="text-lg text-muted-foreground">
-              Find answers to common questions about StyleHub, orders, shipping, and more.
+              Find answers to common questions about elocin, orders, shipping, and more.
             </p>
           </div>
 

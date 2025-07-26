@@ -182,7 +182,7 @@ const SizingGuidePage = () => {
           <div className="bg-secondary p-6 rounded-lg mt-10">
             <h2 className="text-xl font-semibold mb-3">Need More Help?</h2>
             <p className="mb-4">Our customer service team is available to assist you with any sizing questions you may have.</p>
-            <p className="text-muted-foreground">Contact us at <span className="font-medium text-foreground">support@stylehub.com</span> or call <span className="font-medium text-foreground">+1 (555) 123-4567</span> during business hours.</p>
+            <p className="text-muted-foreground">Contact us at <span className="font-medium text-foreground">support@elocin.com</span> or call <span className="font-medium text-foreground">+1 (555) 123-4567</span> during business hours.</p>
           </div>
         </div>
       </div>

@@ -32,8 +32,8 @@ const Navbar: React.FC = () => {
       <div className="container py-4 mx-auto">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="text-2xl font-bold">
-            StyleHub
+          <Link to="/" className="text-2xl font-bold text-foreground">
+            elocin
           </Link>
           
           {/* Desktop Navigation */}

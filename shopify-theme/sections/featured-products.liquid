@@ -1,0 +1,295 @@
+{{ 'section-featured-products.css' | asset_url | stylesheet_tag }}
+
+<section class="featured-products">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{{ section.settings.title | default: 'Featured Products' }}</h2>
+      <p class="section-subtitle">{{ section.settings.subtitle | default: 'Handpicked favorites just for you' }}</p>
+    </div>
+
+    <div class="products-grid">
+      {% assign featured_collection = collections[section.settings.collection] %}
+      {% for product in featured_collection.products limit: section.settings.products_to_show %}
+        <div class="product-card">
+          <div class="product-image">
+            <a href="{{ product.url }}">
+              {% if product.featured_media %}
+                <img src="{{ product.featured_media | image_url: width: 400 }}" 
+                     alt="{{ product.featured_media.alt | escape }}"
+                     loading="lazy">
+              {% else %}
+                <div class="product-image-placeholder">
+                  <span>No Image</span>
+                </div>
+              {% endif %}
+            </a>
+            
+            <!-- Quick Add Button -->
+            <div class="product-actions">
+              <button class="quick-add-btn" data-product-id="{{ product.id }}">
+                Quick Add
+              </button>
+            </div>
+          </div>
+
+          <div class="product-info">
+            <h3 class="product-title">
+              <a href="{{ product.url }}">{{ product.title }}</a>
+            </h3>
+            
+            <div class="product-price">
+              {% if product.compare_at_price > product.price %}
+                <span class="price-sale">${{ product.price | money_without_currency }}</span>
+                <span class="price-compare">${{ product.compare_at_price | money_without_currency }}</span>
+              {% else %}
+                <span class="price-regular">${{ product.price | money_without_currency }}</span>
+              {% endif %}
+            </div>
+
+            {% if product.variants.size > 1 %}
+              <div class="product-variants">
+                <span class="variants-text">{{ product.variants.size }} variants</span>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="section-footer">
+      <a href="{{ featured_collection.url | default: '/collections/all' }}" class="btn btn-outline">
+        View All Products
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .featured-products {
+    padding: 8rem 0;
+    background-color: rgb(var(--color-base-background));
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 6rem;
+  }
+
+  .section-title {
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: rgb(var(--color-base-text));
+    margin-bottom: 1.5rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.8rem;
+    color: rgb(var(--color-base-text));
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    margin-bottom: 6rem;
+  }
+
+  .product-card {
+    background-color: rgb(var(--color-base-background));
+    transition: transform 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .product-image {
+    position: relative;
+    aspect-ratio: 3/4;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .product-card:hover .product-image img {
+    transform: scale(1.05);
+  }
+
+  .product-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(var(--color-base-text));
+    opacity: 0.5;
+  }
+
+  .product-actions {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .product-card:hover .product-actions {
+    opacity: 1;
+  }
+
+  .quick-add-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: rgb(var(--color-base-accent));
+    color: rgb(var(--color-base-background));
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: all 0.3s ease;
+  }
+
+  .quick-add-btn:hover {
+    background-color: rgba(var(--color-base-accent), 0.9);
+  }
+
+  .product-info {
+    text-align: center;
+  }
+
+  .product-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .product-title a {
+    color: rgb(var(--color-base-text));
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .product-title a:hover {
+    opacity: 0.7;
+  }
+
+  .product-price {
+    margin-bottom: 1rem;
+  }
+
+  .price-regular {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: rgb(var(--color-base-text));
+  }
+
+  .price-sale {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #e74c3c;
+    margin-right: 1rem;
+  }
+
+  .price-compare {
+    font-size: 1.6rem;
+    color: rgb(var(--color-base-text));
+    opacity: 0.6;
+    text-decoration: line-through;
+  }
+
+  .product-variants {
+    font-size: 1.4rem;
+    color: rgb(var(--color-base-text));
+    opacity: 0.7;
+  }
+
+  .section-footer {
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .featured-products {
+      padding: 6rem 0;
+    }
+
+    .section-title {
+      font-size: 3rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.6rem;
+    }
+
+    .products-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const quickAddBtns = document.querySelectorAll('.quick-add-btn');
+    
+    quickAddBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const productId = this.dataset.productId;
+        // Add to cart functionality would go here
+        // For now, just redirect to product page
+        window.location.href = `/products/${productId}`;
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Featured Products"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "Handpicked favorites just for you"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Products to show",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,324 @@
+{% liquid
+  assign header_transparent = false
+  if template.name == 'index'
+    assign header_transparent = true
+  endif
+%}
+
+<header class="header{% if header_transparent %} header--transparent{% endif %}">
+  <div class="container">
+    <div class="header__inner">
+      <!-- Logo -->
+      <div class="header__logo">
+        <a href="{{ routes.root_url }}" class="logo">
+          <span class="logo__text">elocin</span>
+        </a>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="header__nav" role="navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="{{ routes.root_url }}" class="nav-link">Home</a>
+          </li>
+          {% for link in linklists.main-menu.links %}
+            <li class="nav-item">
+              <a href="{{ link.url }}" class="nav-link">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header__actions">
+        <!-- Search -->
+        <div class="header__search">
+          <button class="search-toggle" aria-label="Search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Account -->
+        <div class="header__account">
+          <a href="{{ routes.account_url }}" class="account-link" aria-label="Account">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Cart -->
+        <div class="header__cart">
+          <a href="{{ routes.cart_url }}" class="cart-link" aria-label="Shopping Cart">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"></path>
+              <path d="M20 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"></path>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="cart-count">{{ cart.item_count }}</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="header__mobile-toggle">
+          <button class="mobile-menu-toggle" aria-label="Open menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="header__search-bar" style="display: none;">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+        <input type="search" name="q" placeholder="Search products..." class="search-input" value="{{ search.terms | escape }}">
+        <button type="submit" class="search-submit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="header__mobile-menu" style="display: none;">
+      <nav class="mobile-nav">
+        <ul class="mobile-nav-list">
+          <li class="mobile-nav-item">
+            <a href="{{ routes.root_url }}" class="mobile-nav-link">Home</a>
+          </li>
+          {% for link in linklists.main-menu.links %}
+            <li class="mobile-nav-item">
+              <a href="{{ link.url }}" class="mobile-nav-link">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+          <li class="mobile-nav-item">
+            <a href="{{ routes.account_url }}" class="mobile-nav-link">Account</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    background-color: rgb(var(--color-base-background));
+    border-bottom: 1px solid rgb(var(--color-base-outline));
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+  }
+
+  .header--transparent {
+    background-color: transparent;
+    border-bottom: none;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+    min-height: 7rem;
+  }
+
+  .logo__text {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: rgb(var(--color-base-text));
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 3rem;
+  }
+
+  .nav-link {
+    color: rgb(var(--color-base-text));
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+  }
+
+  .nav-link:hover {
+    opacity: 0.7;
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .search-toggle,
+  .account-link,
+  .cart-link {
+    color: rgb(var(--color-base-text));
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .search-toggle:hover,
+  .account-link:hover,
+  .cart-link:hover {
+    opacity: 0.7;
+  }
+
+  .cart-link {
+    position: relative;
+  }
+
+  .cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: rgb(var(--color-base-accent));
+    color: rgb(var(--color-base-background));
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .header__mobile-toggle {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .hamburger-line {
+    width: 24px;
+    height: 2px;
+    background-color: rgb(var(--color-base-text));
+    transition: all 0.3s ease;
+  }
+
+  .search-form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 0;
+    border-top: 1px solid rgb(var(--color-base-outline));
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid rgb(var(--color-base-outline));
+    background-color: rgb(var(--color-base-background));
+    color: rgb(var(--color-base-text));
+  }
+
+  .search-submit {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgb(var(--color-base-text));
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 2rem 0;
+    border-top: 1px solid rgb(var(--color-base-outline));
+  }
+
+  .mobile-nav-item {
+    margin-bottom: 1rem;
+  }
+
+  .mobile-nav-link {
+    color: rgb(var(--color-base-text));
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .header__nav {
+      display: none;
+    }
+
+    .header__mobile-toggle {
+      display: block;
+    }
+
+    .header__actions {
+      gap: 1.5rem;
+    }
+
+    .nav-list {
+      gap: 2rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchToggle = document.querySelector('.search-toggle');
+    const searchBar = document.querySelector('.header__search-bar');
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.querySelector('.header__mobile-menu');
+
+    if (searchToggle && searchBar) {
+      searchToggle.addEventListener('click', function() {
+        const isVisible = searchBar.style.display !== 'none';
+        searchBar.style.display = isVisible ? 'none' : 'block';
+      });
+    }
+
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', function() {
+        const isVisible = mobileMenu.style.display !== 'none';
+        mobileMenu.style.display = isVisible ? 'none' : 'block';
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Menu"
+    }
+  ]
+}
+{% endschema %}

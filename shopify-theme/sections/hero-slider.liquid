@@ -1,0 +1,394 @@
+{{ 'section-hero-slider.css' | asset_url | stylesheet_tag }}
+
+<div class="hero-slider">
+  <div class="hero-slide active" style="background-image: url('{{ section.settings.hero_image_1 | image_url }}');">
+    <div class="hero-content">
+      <div class="container">
+        <div class="hero-text">
+          <h1 class="hero-title">{{ section.settings.hero_title_1 | default: 'Minimalist Fashion' }}</h1>
+          <p class="hero-subtitle">{{ section.settings.hero_subtitle_1 | default: 'Discover timeless pieces for the modern wardrobe' }}</p>
+          <a href="{{ section.settings.hero_button_link_1 | default: '/collections/all' }}" class="btn hero-btn">
+            {{ section.settings.hero_button_text_1 | default: 'Shop Now' }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if section.settings.hero_image_2 != blank %}
+    <div class="hero-slide" style="background-image: url('{{ section.settings.hero_image_2 | image_url }}');">
+      <div class="hero-content">
+        <div class="container">
+          <div class="hero-text">
+            <h1 class="hero-title">{{ section.settings.hero_title_2 | default: 'New Collection' }}</h1>
+            <p class="hero-subtitle">{{ section.settings.hero_subtitle_2 | default: 'Explore our latest arrivals' }}</p>
+            <a href="{{ section.settings.hero_button_link_2 | default: '/collections/new' }}" class="btn hero-btn">
+              {{ section.settings.hero_button_text_2 | default: 'Explore' }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if section.settings.hero_image_3 != blank %}
+    <div class="hero-slide" style="background-image: url('{{ section.settings.hero_image_3 | image_url }}');">
+      <div class="hero-content">
+        <div class="container">
+          <div class="hero-text">
+            <h1 class="hero-title">{{ section.settings.hero_title_3 | default: 'Sale Event' }}</h1>
+            <p class="hero-subtitle">{{ section.settings.hero_subtitle_3 | default: 'Up to 50% off selected items' }}</p>
+            <a href="{{ section.settings.hero_button_link_3 | default: '/collections/sale' }}" class="btn hero-btn">
+              {{ section.settings.hero_button_text_3 | default: 'Shop Sale' }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Navigation Arrows -->
+  {% if section.settings.hero_image_2 != blank or section.settings.hero_image_3 != blank %}
+    <button class="hero-nav hero-prev" aria-label="Previous slide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15,18 9,12 15,6"></polyline>
+      </svg>
+    </button>
+    <button class="hero-nav hero-next" aria-label="Next slide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9,18 15,12 9,6"></polyline>
+      </svg>
+    </button>
+
+    <!-- Dots Indicator -->
+    <div class="hero-dots">
+      <button class="hero-dot active" data-slide="0"></button>
+      {% if section.settings.hero_image_2 != blank %}
+        <button class="hero-dot" data-slide="1"></button>
+      {% endif %}
+      {% if section.settings.hero_image_3 != blank %}
+        <button class="hero-dot" data-slide="2"></button>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .hero-slider {
+    position: relative;
+    height: 70vh;
+    min-height: 500px;
+    overflow: hidden;
+  }
+
+  .hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .hero-slide.active {
+    opacity: 1;
+  }
+
+  .hero-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-text {
+    color: white;
+    max-width: 600px;
+  }
+
+  .hero-title {
+    font-size: 4.8rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+    line-height: 1.4;
+  }
+
+  .hero-btn {
+    background-color: white;
+    color: black;
+    border: 2px solid white;
+    padding: 1.5rem 3rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: all 0.3s ease;
+  }
+
+  .hero-btn:hover {
+    background-color: transparent;
+    color: white;
+  }
+
+  .hero-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 3;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-nav:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .hero-prev {
+    left: 2rem;
+  }
+
+  .hero-next {
+    right: 2rem;
+  }
+
+  .hero-dots {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    z-index: 3;
+  }
+
+  .hero-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .hero-dot.active {
+    background-color: white;
+    border-color: white;
+  }
+
+  @media (max-width: 768px) {
+    .hero-slider {
+      height: 60vh;
+      min-height: 400px;
+    }
+
+    .hero-title {
+      font-size: 3.6rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.8rem;
+    }
+
+    .hero-nav {
+      width: 40px;
+      height: 40px;
+    }
+
+    .hero-prev {
+      left: 1rem;
+    }
+
+    .hero-next {
+      right: 1rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    const prevBtn = document.querySelector('.hero-prev');
+    const nextBtn = document.querySelector('.hero-next');
+    
+    if (slides.length <= 1) return;
+    
+    let currentSlide = 0;
+    
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+    
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+    
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+    
+    // Event listeners
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        currentSlide = index;
+        showSlide(currentSlide);
+      });
+    });
+    
+    // Auto-advance slides every 5 seconds
+    setInterval(nextSlide, 5000);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Hero Slider",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Slide 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_1",
+      "label": "Hero Image 1"
+    },
+    {
+      "type": "text",
+      "id": "hero_title_1",
+      "label": "Title 1",
+      "default": "Minimalist Fashion"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle_1",
+      "label": "Subtitle 1",
+      "default": "Discover timeless pieces for the modern wardrobe"
+    },
+    {
+      "type": "text",
+      "id": "hero_button_text_1",
+      "label": "Button Text 1",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_link_1",
+      "label": "Button Link 1"
+    },
+    {
+      "type": "header",
+      "content": "Slide 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_2",
+      "label": "Hero Image 2"
+    },
+    {
+      "type": "text",
+      "id": "hero_title_2",
+      "label": "Title 2",
+      "default": "New Collection"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle_2",
+      "label": "Subtitle 2",
+      "default": "Explore our latest arrivals"
+    },
+    {
+      "type": "text",
+      "id": "hero_button_text_2",
+      "label": "Button Text 2",
+      "default": "Explore"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_link_2",
+      "label": "Button Link 2"
+    },
+    {
+      "type": "header",
+      "content": "Slide 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_3",
+      "label": "Hero Image 3"
+    },
+    {
+      "type": "text",
+      "id": "hero_title_3",
+      "label": "Title 3",
+      "default": "Sale Event"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle_3",
+      "label": "Subtitle 3",
+      "default": "Up to 50% off selected items"
+    },
+    {
+      "type": "text",
+      "id": "hero_button_text_3",
+      "label": "Button Text 3",
+      "default": "Shop Sale"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_link_3",
+      "label": "Button Link 3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Slider"
+    }
+  ]
+}
+{% endschema %}

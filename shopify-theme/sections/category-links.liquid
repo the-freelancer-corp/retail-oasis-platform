@@ -1,0 +1,279 @@
+{{ 'section-category-links.css' | asset_url | stylesheet_tag }}
+
+<section class="category-links">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{{ section.settings.title | default: 'Shop by Category' }}</h2>
+      <p class="section-subtitle">{{ section.settings.subtitle | default: 'Explore our curated collections' }}</p>
+    </div>
+
+    <div class="categories-grid">
+      {% for block in section.blocks %}
+        <div class="category-card" {{ block.shopify_attributes }}>
+          <a href="{{ block.settings.collection_url | default: '/collections/all' }}" class="category-link">
+            <div class="category-image">
+              {% if block.settings.image %}
+                <img src="{{ block.settings.image | image_url: width: 500 }}" 
+                     alt="{{ block.settings.image.alt | escape }}"
+                     loading="lazy">
+              {% else %}
+                <div class="category-image-placeholder">
+                  <span>{{ block.settings.title | default: 'Category' }}</span>
+                </div>
+              {% endif %}
+              <div class="category-overlay"></div>
+            </div>
+            
+            <div class="category-content">
+              <h3 class="category-title">{{ block.settings.title | default: 'Category Name' }}</h3>
+              <p class="category-description">{{ block.settings.description | default: 'Discover our collection' }}</p>
+              <span class="category-cta">Shop Now</span>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .category-links {
+    padding: 8rem 0;
+    background-color: #f8f9fa;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 6rem;
+  }
+
+  .section-title {
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: rgb(var(--color-base-text));
+    margin-bottom: 1.5rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.8rem;
+    color: rgb(var(--color-base-text));
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+  }
+
+  .category-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: rgb(var(--color-base-background));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .category-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .category-image {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+
+  .category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .category-card:hover .category-image img {
+    transform: scale(1.1);
+  }
+
+  .category-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(var(--color-base-text));
+    opacity: 0.5;
+    font-size: 1.8rem;
+  }
+
+  .category-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .category-card:hover .category-overlay {
+    opacity: 1;
+  }
+
+  .category-content {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .category-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: rgb(var(--color-base-text));
+    margin-bottom: 1rem;
+  }
+
+  .category-description {
+    font-size: 1.6rem;
+    color: rgb(var(--color-base-text));
+    opacity: 0.8;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+  }
+
+  .category-cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: transparent;
+    color: rgb(var(--color-base-accent));
+    border: 2px solid rgb(var(--color-base-accent));
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: all 0.3s ease;
+  }
+
+  .category-card:hover .category-cta {
+    background-color: rgb(var(--color-base-accent));
+    color: rgb(var(--color-base-background));
+  }
+
+  @media (max-width: 768px) {
+    .category-links {
+      padding: 6rem 0;
+    }
+
+    .section-title {
+      font-size: 3rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.6rem;
+    }
+
+    .categories-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .category-content {
+      padding: 2rem 1.5rem;
+    }
+
+    .category-title {
+      font-size: 2rem;
+    }
+
+    .category-description {
+      font-size: 1.4rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Category Links",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "Explore our curated collections"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title",
+          "default": "Category Name"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Category Description",
+          "default": "Discover our collection"
+        },
+        {
+          "type": "url",
+          "id": "collection_url",
+          "label": "Collection URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Links",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Women's Fashion",
+            "description": "Elegant pieces for every occasion"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Men's Fashion",
+            "description": "Contemporary styles for modern men"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Accessories",
+            "description": "Complete your look with our accessories"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
